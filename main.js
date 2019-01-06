@@ -5,7 +5,7 @@ var login_warning = false;
 var register_warning = false;
 var register_width;
 var register_exit_width;
-var register_pos;
+var register_pos = null;
 
 $(function () {
 	drawStars();
@@ -63,7 +63,7 @@ $(function () {
 	$('#login-password, #login-email').on('input', function ()
 	{
 		var space_pattern = /[\s]/;
-		var email_pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/;
+		var email_pattern = /^([a-zA-Z0-9_\.-]+)@([a-zA-Z0-9_\.-]+)\.([a-zA-Z\.]{2,6})$/;
 		login_warning = false;
 		if ( !email_pattern.test($('#login-email').val()) )
 		{
@@ -102,8 +102,10 @@ $(function () {
 	});
 
 	$('#register').click(function () {
-		if ( $(this).width() == 100 )
+		if ( $(this).width() <= 100 )
 		{
+			let login_width  = $('#login').width();
+			let login_height = $('#login').height();
 			if (register_pos == null)
 				register_pos = $('#register').offset();
 			$('#login').animate({
@@ -116,10 +118,10 @@ $(function () {
 			// $('#register').toggleClass('register-active');
 
 			$('#register').animate({
-				'left': '30%',
-				'top': '20%',
-				'width': '40%',
-				'height': '60%',
+				'left': ($(window).width() - login_width)/2+'px',
+				'top': ($(window).height() - login_height)/2+'px',
+				'width': login_width+'px',
+				'height': login_height+'px',
 				'border-radius': '5px',
 			}, 500);
 
@@ -142,7 +144,7 @@ $(function () {
 	});
 
 	$('#register-exit').click(function () {
-		if ( $('#register').width() != 100 )
+		if ( $('#register').width() > 100 )
 		{
 			$('#register div, #register span, #register button').fadeOut(300);
 			setTimeout(function () {
@@ -155,8 +157,8 @@ $(function () {
 				$('#register').animate({
 					'left': register_pos['left'] + 'px',
 					'top': register_pos['top'] + 'px',
-					'width': '100px',
-					'height': '100px',
+					'width': register_width+'px',
+					'height': register_width+'px',
 					'border-radius': '100%',
 				}, 500);
 
@@ -182,7 +184,7 @@ $(function () {
 
 	$('#register-username, #register-email, #register-password, #register-repeat-password').on('input', function () {
 		var space_pattern = /[\s]/;
-		var email_pattern = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/;
+		var email_pattern = /^([a-zA-Z0-9_\.-]+)@([a-zA-Z0-9_\.-]+)\.([a-zA-Z\.]{2,6})$/;
 		register_warning = false;
 		if ( $.trim($('#register-username').val()) == '' )
 		{
@@ -297,7 +299,7 @@ function checkLanguages(e) {
 		globeY = e.pageY;
 	}
 	var h = $(window).height(),
-		w = $(window).width();
+			w = $(window).width();
 	var d = 30;
 	if ($('.check-languages-point').length == 0) {
 		$('body').append("<div class='check-languages-point'></div>");
@@ -382,7 +384,7 @@ function startLearning() {
 }
 
 function backToMainPage() {
-	if ($('#register').width() == 100)
+	if ($('#register').width() <= 100)
 	{
 		$('#register').animate({
 			'opacity': '0'

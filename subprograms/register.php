@@ -8,7 +8,7 @@
   }
 
   $space_pattern = "/[\s]/";
-  $email_pattern = "/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/";
+  $email_pattern = "/^([a-zA-Z0-9_\.-]+)@([a-zA-Z0-9_\.-]+)\.([a-zA-Z\.]{2,6})$/";
   $register_warning = false;
 
   $username = htmlspecialchars(mysqli_real_escape_string($connection, $_POST['username']));
