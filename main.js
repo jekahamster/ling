@@ -11,6 +11,7 @@ $(function () {
 	drawStars();
 	getBackgroundColor();
 	$('#start-button').click(startLearning);
+	$('#modal-overlay').click(backToMainPage);
 	register_width = $('#register').width();
 	register_exit_width = $('#register-exit').width();
 
@@ -346,7 +347,7 @@ function checkLanguages(e) {
 function startLearning() {
 	var num = 15;
 	var h = $(window).height(),
-		w = $(window).width();
+			w = $(window).width();
 	var d = Math.max(w, h)/2;
 	for (var i = 0; i < num; i++)
 	{
@@ -378,6 +379,40 @@ function startLearning() {
 			}, 200);
 		}, 900);
 	}, 900);
+}
+
+function backToMainPage() {
+	if ($('#register').width() == 100)
+	{
+		$('#register').animate({
+			'opacity': '0'
+		}, 500);
+		setTimeout(function () {
+			$('#modal-background').css({
+				'display': 'flex'
+			});
+			$('#login').animate({
+				'opacity': '0'
+			}, 1000);
+
+			setTimeout(function () {
+				$('#modal-background').fadeOut(1000);
+				setTimeout(function () {
+					$('.bubble').css({
+						'width': '1px',
+						'height': '1px'
+					});
+					$('.bubble').on('transitionend', function () {
+						$(this).remove();
+					});
+				}, 0);
+			}, 900);
+		}, 0);
+	}
+	else
+	{
+		$('#register-exit').trigger('click');
+	}
 }
 
 function loginButtonAnim(x) {

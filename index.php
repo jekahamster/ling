@@ -63,6 +63,7 @@
 		</div>
 	</div>
 	<div id='modal-background'>
+		<div id='modal-overlay'></div>
 		<div id="login">
 			<span>LOGIN</span>
 			<div class="input-field">
