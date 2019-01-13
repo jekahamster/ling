@@ -12,7 +12,7 @@ a {text-decoration: none;}
 	position: relative;
 	background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 	background-attachment: fixed;
-  	background-size: cover;
+  background-size: cover;
 	background-repeat: no-repeat;
 }
 
@@ -126,7 +126,7 @@ a {text-decoration: none;}
 #stars-background {
 	background-color: rgba(0, 0, 0, 0);
 	width: 100%;
-	height: 100%;
+	height: 99.6%;
 }
 
 .check-languages-point {
